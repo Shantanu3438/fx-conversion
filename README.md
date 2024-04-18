@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# fx-Conversion API
 
-## Getting Started
+This project implements a RESTful API for currency conversion and related functionalities using Node.js with TypeScript, Next.js, Prisma, Redis, and JWT authentication. It provides endpoints for user authentication, foreign exchange rate retrieval, currency conversion, balance updates, and more.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **User Authentication**: Users can authenticate using JWT tokens.
+- **Foreign Exchange Rates**: Retrieve real-time foreign exchange rates from an external API and cache them in Redis.
+- **Currency Conversion**: Convert currency from one currency to another with proper authentication and balance checks.
+- **Balance Updates**: Deposit funds, check account balances, and update user balances for various currencies.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Endpoints
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Authentication
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- `POST /api/login`: User login with username and password.
+- `POST /api/signup`: User signup with a new account.
 
-## Learn More
+### Foreign Exchange Rates
 
-To learn more about Next.js, take a look at the following resources:
+- `GET /api/fx-rates`: Get foreign exchange rates from the cache or fetch from the API.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Currency Conversion
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- `POST /api/convert`: Convert currency from one currency to another.
 
-## Deploy on Vercel
+### Balance Management
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `GET /api/balances`: Get user balances for various currencies.
+- `POST /api/deposit`: Deposit funds into the user's account for a specific currency.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Installation
+
+1. Clone the repository:
+`git clone https://github.com/your_username/currency-conversion-api.git`
+
+2. Install dependencies:
+`cd currency-conversion-api`
+`npm install`
+3. Set up environment variables:
+
+Create a `.env` file in the root directory and add the following variables:
+
+`SECRET_KEY=your_secret_key`
+
+4. Start the development server:
+`npm run dev`
+
+5. Access the API endpoints at `http://localhost:3000/api`.
+
+## Technologies Used
+
+- Node.js
+- TypeScript
+- Next.js
+- Prisma
+- Redis
+- JWT authentication
+
