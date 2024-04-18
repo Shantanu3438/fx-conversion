@@ -112,5 +112,5 @@ export default async function handler(req : NextApiRequest, res : NextApiRespons
         where: {id: user_id}
     }
     ))
-    res.status(200).json({"message" :user_id});
+    res.status(200).json({"message" :"Topup succesfull"});
 }   

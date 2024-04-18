@@ -119,15 +119,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (user){
         const from_currency_balance = user[currency_mapping[from_currency]];
         const to_currency_balance = user[currency_mapping[to_currency]];
-        let fx_rates = await get_rates_redis();
+        let fx_rates = await get_rates_redis(quoteID);
         if (Object.keys(fx_rates).length === 0) {
-            await set_rates_redis();
-            fx_rates = await get_rates_redis();
+            const quoteid = await set_rates_redis();
+            fx_rates = await get_rates_redis(quoteid);
+            res.status(403).json({"Message": "quoteID Expired"})
         }
-        console.log(fx_rates, from_currency, to_currency, amount);
         const conversion_rate = fx_rates[from_currency][to_currency];
         if(amount > 0 && from_currency_balance < amount) {
-            return res.status(403).json({"Message": "Balance low"})
+            return res.status(403).json({"Message": "Balance low"});
         }
         else {
             const converted_amount = conversion_rate * amount;
